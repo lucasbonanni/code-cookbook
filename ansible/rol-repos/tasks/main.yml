@@ -16,3 +16,10 @@
     cmd: "git clone git@github.com:lucasbonanni/{{item.item}}.git {{ repo_path }}/{{item.item}}"
   when: not item.stat.exists
   loop: "{{ directory_check_results.results }}"
+
+- name: Clone a repository
+  ansible.builtin.git:
+    repo: "git@github.com:lucasbonanni/{{item.item}}.git"
+    dest: "{{ repo_path }}/{{item.item}}"
+  when: not item.stat.exists
+  loop: "{{ directory_check_results.results }}"
