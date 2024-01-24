@@ -1,0 +1,39 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8083:8080"
+    depends_on:
+      - db
+
+  db:
+    image: mariadb
+    user: mysql
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+      MYSQL_DATABASE: ktor_library
+    volumes:
+      - ./.data/dbdata:/var/lib/mysql:Z
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+#  prometheus:
+#    image: prom/prometheus
+#    restart: always
+#    ports:
+#      - "3570:9090"
+#    volumes:
+#      - ./monitoring:/etc/prometheus
+#  grafana:
+#    image: grafana/grafana:5.1.0
+#    ports:
+#      - "3000:3000"
+#    user: "104"
+#    volumes:
+#      - ./monitoring/grafana:/var/lib/grafana
+#    links:
+#      - api
+#      - prometheus
