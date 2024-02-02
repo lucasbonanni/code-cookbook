@@ -75,3 +75,9 @@ In this example, `\t` represents a tab character, which is the field separator i
 
 ### Example
 `ls -lah | grep .pdf | awk '{printf("%-60s %-10s\n",  $NF, $5);}'`
+
+## Join multiple csv files
+
+awk '(NR == 1) || (FNR > 1)' *.csv > 1000Plus5years_companies_data.csv
+
+[source link](https://unix.stackexchange.com/questions/293775/merging-contents-of-multiple-csv-files-into-single-csv-file)
